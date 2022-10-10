@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posto de Gasolina</title>
+</head>
+<body>
+    <h1>Posto de Gasolina</h1>
+    <div>
+        
+        Litros Disponiveis <input type="text" name="ltsDisponiveis" id="ltsDisponiveis"><br>
+        Preço da Gasolina <input type="text" name="preco" id="preco"><br>
+        <br> Comprar <input type="text" name="comprar" id="comprar">
+        <button onclick="iniciar()">Comprar</button>
+
+        <script>
+        
+            function iniciar(){
+                var ltsDisponiveis = document.getElementById("ltsDisponiveis");
+                var preco = document.getElementById("preco");
+                var comprar = document.getElementById("comprar");
+                var newPreco = Number(preco.value)
+                var newComprar = Number(comprar.value)
+                var newLtsDisponiveis = Number(ltsDisponiveis.value)
+                var total = newPreco * newComprar;
+
+                if (newLtsDisponiveis > 0 && newLtsDisponiveis >= newComprar){
+                    newLtsDisponiveis = newLtsDisponiveis - newComprar
+                    alert("Compra efetuada com sucesso, valor a pagar: " + total + " reais")
+                }
+                else{
+                    alert("Não há gasolina disponivel")
+                }
+            }
+        </script>
+</body>
+</html>

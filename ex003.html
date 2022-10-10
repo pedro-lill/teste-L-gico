@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel</title>
+</head>
+<body>
+    <h1>Sistema de Hotel</h1>
+    <div>
+        <label for="Qlivres"> Quantidade de quartos disponíveis</label><br>
+        <span id="Qlivres"></span>
+        <br> <br>
+
+        <label for="hospedes">Quantidade total de hóspedes no Hotel  </label><br>
+        <span id="hospedes"></span>
+        <br> <br>
+
+        <label for="quartos"> Número do andar e o número de cada quarto disponível</label><br>
+        <ul id="quartos"></ul>
+        <br> <br>
+
+
+    </div>
+    
+    <script>
+        function iniciar(){
+            var Hotel = HotelPronto();
+
+            var spanquartosLivres = document.getElementById("Qlivres")
+            var spannumHospedes = document.getElementById("hospedes")
+            var quartosDisp = document.getElementById("quartos")
+
+            spanquartosLivres.innerText = calcular(Hotel);
+            spannumHospedes.innerText = Verificar(Hotel);
+
+            var quartos = VerificarQuartos(Hotel);
+            for (var i = 0; i < quartos.length; i++) {
+                var li = document.createElement("li");
+                li.innerText = `Andar ${quartos[i].andar}, Quarto ${quartos[i].Quarto}`;
+                quartosDisp.appendChild(li);
+        }
+
+
+
+        }
+        function HotelPronto(){
+            return [
+            [0, 1, 2, 3, 4, 5, 6, 0],
+            [3, 4, 5, 0, 7, 8, 0, 1],
+            [6, 7, 0, 0, 1, 2, 3, 4],
+            [9, 1, 2, 3, 4, 5, 6, 0],
+            [2, 3, 4, 0, 6, 0, 8, 0]
+            ]
+        }
+        function calcular(Hotel){
+            var ocupados = 0
+            var livres = 0
+            for(var i = 0; i < Hotel.length; i++){
+                for(var j = 0; j < Hotel[i].length; j++){
+                    if(Hotel[i][j] == 0){
+                        livres++
+                    }else{
+                        ocupados++
+                    }
+                }
+            }
+            return livres
+            //Qlivres.innerHTML += `<p>O Hotel tem ${livres} quartos disponiveis</p>`
+        }
+        function Verificar(Hotel){
+            var hospedes = 0
+            for(var i = 0; i < Hotel.length; i++){
+                for(var j = 0; j < Hotel[i].length; j++){
+                    hospedes = hospedes + Hotel[i][j];
+                    }
+                }
+                return hospedes
+                //hospedes.innerHTML += `<p>O Hotel tem ${hospedes} hospedes</p>`
+        }
+        function VerificarQuartos(Hotel){
+            var disponivel = []
+            for(var i = 0; i < Hotel.length; i++){
+                for(var j = 0; j < Hotel[i].length; j++){
+                    if (Hotel[i][j] == 0){
+                        disponivel.push({"andar":i, "Quarto":j})
+                    }
+                }
+            }
+            return disponivel
+            //quartos.innerHTML += `<p>os quartos ${disponivel} estao disponiveis</p>`
+        }
+        document.addEventListener("DOMContentLoaded", iniciar);
+    </script>
+</body>
+</html>
